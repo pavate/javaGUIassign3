@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pavate.FXMLDocumentController">
+   <children>
+        <Label fx:id="lbl1" text=" abc" layoutX="36.0" layoutY="44.0" prefHeight="17.0" prefWidth="102.0" textFill="#3806ff">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField layoutX="153.0" layoutY="40.0" prefHeight="25.0" prefWidth="78.0" />
+        <Label layoutX="39.0" layoutY="71.0" prefHeight="17.0" prefWidth="67.0" text="Item Name:" textFill="#000cf5">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField layoutX="106.0" layoutY="67.0" prefHeight="25.0" prefWidth="242.0" />
+        <Label layoutX="22.0" layoutY="100.0" prefHeight="17.0" prefWidth="84.0" text="Qty-On-Hand:" textFill="#1500ff">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField layoutX="106.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" />
+        <Label layoutX="192.0" layoutY="100.0" prefHeight="17.0" prefWidth="95.0" text="Re-order Point: " textFill="#0a00f7">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField layoutX="278.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" />
+        <Label layoutX="51.0" layoutY="134.0" prefHeight="17.0" prefWidth="61.0" text="Sell Price:" textFill="#3300ff">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField layoutX="106.0" layoutY="130.0" prefHeight="25.0" prefWidth="78.0" />
+        <Label layoutX="122.0" layoutY="14.0" prefHeight="20.0" prefWidth="133.0" text="Inventory Tracker" textFill="#225b0f">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Button layoutX="106.0" layoutY="161.0" mnemonicParsing="false" text="Add" />
+        <Button layoutX="163.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
+        <Button layoutX="239.0" layoutY="161.0" mnemonicParsing="false" text="Orders" />
+        <Line endX="9.0" endY="1.0" layoutX="5.0" layoutY="37.0" startX="9.0" startY="165.0" stroke="#1100ff" strokeWidth="3.0" />
+        <Button layoutX="311.0" layoutY="161.0" mnemonicParsing="false" text="Exit" />
+        <Line endX="-0.5" endY="-9.5" layoutX="15.0" layoutY="47.0" startX="347.0" startY="-9.5" stroke="#000dff" strokeWidth="3.0" />
+        <Line endX="336.5" endY="143.5" layoutX="25.0" layoutY="57.0" startX="337.5" startY="-19.0" stroke="#1500ff" strokeWidth="3.0" />
+        <Line endX="326.0" endY="134.0" layoutX="35.0" layoutY="67.0" startX="-21.0" startY="134.0" stroke="#0d00ff" strokeWidth="3.0" />
+    </children>
+</AnchorPane>
