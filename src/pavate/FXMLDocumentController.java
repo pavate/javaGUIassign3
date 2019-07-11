@@ -5,10 +5,16 @@
  */
 package pavate;
 
+import static java.awt.Color.yellow;
+import java.awt.event.MouseEvent;
 import static java.lang.Double.parseDouble;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,7 +24,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
 /**
@@ -26,6 +34,7 @@ import javafx.scene.layout.Pane;
  * @author acer
  */
 public class FXMLDocumentController implements Initializable {
+    ObservableList list =FXCollections.observableArrayList();
 
     @FXML
     private Label label;
@@ -35,24 +44,25 @@ public class FXMLDocumentController implements Initializable {
     Button btnAdd, btnSave, btnOrders, btnExit, btnTrial;
     @FXML
     TextField txtID, txtName, txtHand, txtPoint, txtPrice;
+    @FXML
+    ListView<String> listInv;
     String[] labelsfX = {"lblID", "lblName", "lblHand", "lblPoint", "lblPrice"};
     String[] buttonsfX = {"btnAdd", "btnSave", "btnOrders", "btnExit"};
     String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
-
-    @FXML
-    public void saveInventory(ActionEvent event) {
-        String id = lblID.getText();
-        lblResult.setText(id);
-
-    }
+    List<Inventory> invList = new ArrayList<>();
 
 //    @FXML
-//    private void handleButtonAction(ActionEvent event) {
-//        System.out.println("You clicked me!");
-//        label.setText("Hello World!");
-//    }
+//    private void showReor(MouseEvent event) {
+//        String movie=listInv.getSelectionModel().getSelectedItem();
+//        if(movie==null||movie.isEmpty()){
+//            lblResult.setText("hahah");
+//            
+//            
+//        }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         lblID.setText(Fields.ITEM_ID.getCaption());
         lblName.setText(Fields.ITEM_NAME.getCaption());
         lblHand.setText(Fields.QOH.getCaption());
@@ -84,6 +94,7 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         btnAdd.setOnAction((ActionEvent event) -> {
+            lblResult.setText("Complete Process to add");
             btnSave.setDisable(false);
             btnAdd.setDisable(true);
             btnOrders.setDisable(true);
@@ -153,35 +164,55 @@ public class FXMLDocumentController implements Initializable {
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
 
-            }else{
+            } else {
 
-            String id = txtID.getText();
-            String name = txtName.getText();
-            double qty = Double.parseDouble(txtHand.getText());
-            double units = Double.parseDouble(txtPrice.getText());
-            double points = Double.parseDouble(txtPoint.getText());
-            
-            Inventory inven = new Inventory(id, name, qty , units, points );
-            InventoryList inventorylist = new InventoryList();
-            inventorylist.add(inven);
-            
-           
+                String id = txtID.getText();
+                String name = txtName.getText();
+                double qty = Double.parseDouble(txtHand.getText());
+                double units = Double.parseDouble(txtPrice.getText());
+                double points = Double.parseDouble(txtPoint.getText());
 
-            btnSave.setDisable(true);
-            btnAdd.setDisable(false);
-            btnOrders.setDisable(false);
+                Inventory inven = new Inventory(id, name, qty, units, points);
+                invList.add(inven);
+
+                lblResult.setText("Inventory Added to database");
+
+                btnSave.setDisable(true);
+                btnAdd.setDisable(false);
+                btnOrders.setDisable(false);
+
+                txtID.setDisable(true);
+                txtPrice.setDisable(true);
+                txtName.setDisable(true);
+                txtPoint.setDisable(true);
+                txtHand.setDisable(true);
+
+                txtID.setText("");
+                txtPrice.setText("");
+                txtName.setText("");
+                txtPoint.setText("");
+                txtHand.setText("");
+
             }
 
-//            else{
-//       
-//            }
-//            
-//            if (id.matches("([A-Z][A-Z][A-Z])-([0-9][0-9][0-9][0-9])")) {
-//                btnExit.setDisable(true);
-//
-//            }
         });
-       
+         btnOrders.setOnAction((ActionEvent event) -> {
+             if(invList.size()==0){
+                 lblResult.setText("No Orders to be shown");
+             }
+             else{
+             list.removeAll(list);       
+             String a = (invList.get(0).toString());
+             String b =(invList.get(1).toString());
+             String c ="hahah";
+             String d ="hahah";
+             list.addAll(a,b,c,d);
+             listInv.getItems().addAll(list);
+             }
+             
+            
+        });
+        
 
     }
 
