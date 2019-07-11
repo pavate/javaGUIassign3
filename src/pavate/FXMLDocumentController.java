@@ -40,7 +40,7 @@ public class FXMLDocumentController implements Initializable {
     String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
 
     @FXML
-    public void check(ActionEvent event) {
+    public void saveInventory(ActionEvent event) {
         String id = lblID.getText();
         lblResult.setText(id);
 
@@ -160,6 +160,12 @@ public class FXMLDocumentController implements Initializable {
             double qty = Double.parseDouble(txtHand.getText());
             double units = Double.parseDouble(txtPrice.getText());
             double points = Double.parseDouble(txtPoint.getText());
+            
+            Inventory inven = new Inventory(id, name, qty , units, points );
+            InventoryList inventorylist = new InventoryList();
+            inventorylist.add(inven);
+            
+           
 
             btnSave.setDisable(true);
             btnAdd.setDisable(false);
@@ -175,20 +181,7 @@ public class FXMLDocumentController implements Initializable {
 //
 //            }
         });
-        btnTrial.setOnAction((ActionEvent event) -> {
-            String id = txtID.getText();
-            if (id.matches("([A-Z][A-Z][A-Z])-([0-9][0-9][0-9][0-9])")) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
-                alert.setTitle("Data Entry Error");
-                alert.setHeaderText("Empty cell");
-                alert.setContentText("Please correct and try again");
-                alert.showAndWait();
-
-            }
-
-        });
+       
 
     }
 
