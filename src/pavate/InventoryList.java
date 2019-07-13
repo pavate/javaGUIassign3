@@ -5,9 +5,13 @@ import java.util.*;
 /**
  * @author acer
  */
-public class InventoryList {
-
+public class InventoryList  {
     List<Inventory> invList = new ArrayList<Inventory>();
+    
+
+   
+    
+     
 
     /**
      *

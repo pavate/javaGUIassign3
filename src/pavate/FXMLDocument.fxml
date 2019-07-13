@@ -46,19 +46,19 @@
         </Label>
         <Button fx:id="btnAdd" layoutX="106.0" layoutY="161.0" mnemonicParsing="false" text="Add" />
         <Button fx:id="btnSave" layoutX="163.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
-        <Button fx:id="btnOrders" layoutX="239.0" layoutY="161.0" mnemonicParsing="false" text="Orders" />
+        <Button fx:id="btnOrders" layoutX="239.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#clearlist" text="Orders" />
         <Line endX="9.0" endY="1.0" layoutX="5.0" layoutY="37.0" startX="9.0" startY="165.0" stroke="#1100ff" strokeWidth="3.0" />
         <Button fx:id="btnExit" layoutX="311.0" layoutY="161.0" mnemonicParsing="false" text="Exit" />
         <Line endX="-0.5" endY="-9.5" layoutX="15.0" layoutY="47.0" startX="347.0" startY="-9.5" stroke="#000dff" strokeWidth="3.0" />
         <Line endX="336.5" endY="143.5" layoutX="25.0" layoutY="57.0" startX="337.5" startY="-19.0" stroke="#1500ff" strokeWidth="3.0" />
         <Line endX="326.0" endY="134.0" layoutX="35.0" layoutY="67.0" startX="-21.0" startY="134.0" stroke="#0d00ff" strokeWidth="3.0" />
       <TextField fx:id="txtPrice" layoutX="106.0" layoutY="130.0" prefHeight="25.0" prefWidth="78.0" />
-      <Label fx:id="lblResult" layoutX="8.0" layoutY="456.0" prefHeight="17.0" prefWidth="380.0" textFill="RED">
+      <Label fx:id="lblResult" layoutX="8.0" layoutY="456.0" prefHeight="17.0" prefWidth="380.0" textFill="#2c0e9a">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ListView fx:id="listInv" layoutX="6.0" layoutY="244.0"  prefHeight="200.0" prefWidth="386.0" />
+      <ListView fx:id="listInv" layoutX="6.0" layoutY="244.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="386.0" />
      
     </children>
 </AnchorPane>

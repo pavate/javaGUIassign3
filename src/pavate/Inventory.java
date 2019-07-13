@@ -6,8 +6,8 @@ package pavate;
 class Inventory {
 
     private String id;
-    private int qoh;
-    private int rop;
+    private double qoh;
+    private double rop;
     private double sellPrice;
     private String name;
 
@@ -31,7 +31,7 @@ class Inventory {
      * @param rop
      * @param sellPrice
      */
-    public Inventory(String id, String name, int qoh, int rop, double sellPrice) {
+    public Inventory(String id, String name, double qoh, double rop, double sellPrice) {
         this.id = id;
         this.name = name;
         this.qoh = qoh;
@@ -51,7 +51,7 @@ class Inventory {
         this.id = id;
     }
 
-    public int getQoh() {
+    public double getQoh() {
         return this.qoh;
     }
 
@@ -63,7 +63,7 @@ class Inventory {
         this.qoh = qoh;
     }
 
-    public int getRop() {
+    public double getRop() {
         return this.rop;
     }
 
@@ -101,8 +101,8 @@ class Inventory {
 
     @Override()
     public String toString() {
-        // TODO - implement Inventory.toString
-        throw new UnsupportedOperationException();
+         String format = "%s   (   %s    )  ,    QOH: %.0f    Price: $%.2f ";
+        return String.format(format, id, name, qoh, sellPrice);
     }
 
 }

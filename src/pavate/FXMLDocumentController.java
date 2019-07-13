@@ -34,7 +34,8 @@ import javafx.scene.layout.Pane;
  * @author acer
  */
 public class FXMLDocumentController implements Initializable {
-    ObservableList list =FXCollections.observableArrayList();
+
+    ObservableList list = FXCollections.observableArrayList();
 
     @FXML
     private Label label;
@@ -45,11 +46,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     TextField txtID, txtName, txtHand, txtPoint, txtPrice;
     @FXML
-    ListView<String> listInv;
+    ListView<Inventory> listInv;
     String[] labelsfX = {"lblID", "lblName", "lblHand", "lblPoint", "lblPrice"};
     String[] buttonsfX = {"btnAdd", "btnSave", "btnOrders", "btnExit"};
     String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
+
     List<Inventory> invList = new ArrayList<>();
+    @FXML
+    public void displaySelected(javafx.scene.input.MouseEvent event) {
+       
+       
+       lblResult.setText("hahaha");
+     
+            //lblResult.setText(String.format("%f", abc.getRop()));
+       
+    }
+
+    @FXML
+    public void clearlist(javafx.scene.input.MouseEvent event) {
+       // listInv.getItems().removeAll(list);
+
+    }
 
 //    @FXML
 //    private void showReor(MouseEvent event) {
@@ -59,7 +76,6 @@ public class FXMLDocumentController implements Initializable {
 //            
 //            
 //        }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -80,8 +96,8 @@ public class FXMLDocumentController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Confirmation Dialog");
                 alert.setHeaderText("Would you like to Quit?");
                 alert.setContentText("Are you ok with this?");
@@ -112,8 +128,8 @@ public class FXMLDocumentController implements Initializable {
             if (txtID.getText().isEmpty() || txtPrice.getText().isEmpty() || txtName.getText().isEmpty()
                     || txtPoint.getText().isEmpty() || txtHand.getText().isEmpty()) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Empty cell");
                 alert.setContentText("Please correct and try again");
@@ -121,8 +137,8 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtID.getText().matches("([A-Z][A-Z][A-Z])-([0-9][0-9][0-9][0-9])")) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("ID must be of the form ABC-1234");
                 alert.setContentText("Please correct and try again");
@@ -130,8 +146,8 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtName.getText().matches("[a-zA-Z]{0,30}")) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Name cannot contain numbers");
                 alert.setContentText("Please correct and try again");
@@ -139,8 +155,8 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtHand.getText().matches("[0-9],{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Quantity on Hand can only be a number");
                 alert.setContentText("Please correct and try again");
@@ -148,8 +164,8 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtPrice.getText().matches("[0-9],{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+               alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Unit Price can only be a number");
                 alert.setContentText("Please correct and try again");
@@ -157,8 +173,8 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtPoint.getText().matches("[0-9],{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setX(780);
-                alert.setY(440);
+                alert.setX(500);
+                alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Re-order point can only be a number");
                 alert.setContentText("Please correct and try again");
@@ -196,22 +212,24 @@ public class FXMLDocumentController implements Initializable {
             }
 
         });
-         btnOrders.setOnAction((ActionEvent event) -> {
-             if(invList.size()==0){
-                 lblResult.setText("No Orders to be shown");
-             }
-             else{
-             list.removeAll(list);       
-             String a = (invList.get(0).toString());
-             String b =(invList.get(1).toString());
-             String c ="hahah";
-             String d ="hahah";
-             list.addAll(a,b,c,d);
-             listInv.getItems().addAll(list);
-             }
-             
-            
+        btnOrders.setOnAction((ActionEvent event) -> {
+
+            if (invList.size() == 0) {
+                lblResult.setText("No Items needs re-ordering.");
+            } else {
+                listInv.getItems().removeAll(list);
+                listInv.getItems().clear();
+                listInv.refresh();
+
+                for (int i = 0; i <= invList.size() - 1; i++) {
+                    list.add(invList.get(i).toString());
+                }
+                listInv.getItems().addAll(list);
+
+            }
+
         });
+        
         
 
     }
