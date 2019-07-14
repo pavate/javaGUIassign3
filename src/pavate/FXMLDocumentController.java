@@ -36,7 +36,7 @@ import javafx.scene.layout.Pane;
  */
 public class FXMLDocumentController implements Initializable {
 
-    ObservableList list = FXCollections.observableArrayList();
+    //ObservableList list = FXCollections.observableArrayList();
 
     @FXML
     private Label label;
@@ -57,8 +57,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public void displaySelected(javafx.scene.input.MouseEvent event) {
-
-        lblResult.setText("hahaha");
+        int r = listInv.getSelectionModel().getSelectedIndex();
+        lblResult.setText("Re-Order Point: " + invList.get(r).getRop());
 
         //lblResult.setText(String.format("%f", abc.getRop()));
     }
@@ -88,6 +88,7 @@ public class FXMLDocumentController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
+                actualList.clear();
 
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setX(500);
@@ -104,6 +105,7 @@ public class FXMLDocumentController implements Initializable {
             }
         });
         btnAdd.setOnAction((ActionEvent event) -> {
+            actualList.clear();
             lblResult.setText("Complete Process to add");
             btnSave.setDisable(false);
             btnAdd.setDisable(true);
@@ -117,9 +119,12 @@ public class FXMLDocumentController implements Initializable {
             txtHand.setDisable(false);
 
         });
-
+        //This is from the FXML fx:id btn Save when a user clicks 
+        // on the Save button.
         btnSave.setOnAction((ActionEvent event) -> {
 
+            //The compiler Checks if there are any empty cells
+            //before the save button is pressed 
             if (txtID.getText().isEmpty() || txtPrice.getText().isEmpty() || txtName.getText().isEmpty()
                     || txtPoint.getText().isEmpty() || txtHand.getText().isEmpty()) {
                 Alert alert = new Alert(AlertType.ERROR);
@@ -130,6 +135,7 @@ public class FXMLDocumentController implements Initializable {
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
 
+                //The Inventory ID should match the format ABC-1234 or a alert is shown
             } else if (!txtID.getText().matches("([A-Z][A-Z][A-Z])-([0-9][0-9][0-9][0-9])")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setX(500);
@@ -138,7 +144,7 @@ public class FXMLDocumentController implements Initializable {
                 alert.setHeaderText("ID must be of the form ABC-1234");
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
-
+                //The name of the inventory can be any word and any capitilization
             } else if (!txtName.getText().matches("[a-zA-Z]{0,30}")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setX(500);
@@ -147,8 +153,8 @@ public class FXMLDocumentController implements Initializable {
                 alert.setHeaderText("Name cannot contain numbers");
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
-
-            } else if (!txtHand.getText().matches("[0-9],{0,20}")) {
+                //The quantity on hand can only be a number
+            } else if (!txtHand.getText().matches("[0-9]{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setX(500);
                 alert.setY(350);
@@ -156,8 +162,8 @@ public class FXMLDocumentController implements Initializable {
                 alert.setHeaderText("Quantity on Hand can only be a number");
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
-
-            } else if (!txtPrice.getText().matches("[0-9],{0,20}")) {
+                //The price must only be a number
+            } else if (!txtPrice.getText().matches("[0-9]{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setX(500);
                 alert.setY(350);
@@ -165,8 +171,8 @@ public class FXMLDocumentController implements Initializable {
                 alert.setHeaderText("Unit Price can only be a number");
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
-
-            } else if (!txtPoint.getText().matches("[0-9],{0,20}")) {
+                //The reorder point must only be a number
+            } else if (!txtPoint.getText().matches("[0-9]{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setX(500);
                 alert.setY(350);
@@ -175,6 +181,8 @@ public class FXMLDocumentController implements Initializable {
                 alert.setContentText("Please correct and try again");
                 alert.showAndWait();
 
+                //If everything else is ok then the following data is taken 
+                //from the text fields and a Inventory is instanciated
             } else {
 
                 String id = txtID.getText();
@@ -187,7 +195,7 @@ public class FXMLDocumentController implements Initializable {
                 invList.add(inven);
 
                 lblResult.setText("Inventory Added to database");
-
+                //Everything else is set to default
                 btnSave.setDisable(true);
                 btnAdd.setDisable(false);
                 btnOrders.setDisable(false);
@@ -207,6 +215,8 @@ public class FXMLDocumentController implements Initializable {
             }
 
         });
+        //This is from the FXML fx:id btn Orders when a user clicks 
+        // on the Order button.
         btnOrders.setOnAction((ActionEvent event) -> {
             actualList.clear();
 
@@ -215,20 +225,6 @@ public class FXMLDocumentController implements Initializable {
                 actualList.add(invList.get(i).toString());
             }
             listInv.setItems(actualList);
-
-//            if (invList.size() == 0) {
-//                lblResult.setText("No Items needs re-ordering.");
-//            } else {
-//                listInv.getItems().removeAll(list);
-//                listInv.getItems().clear();
-//                listInv.refresh();
-//
-//                for (int i = 0; i <= invList.size() - 1; i++) {
-//                    list.add(invList.get(i).toString());
-//                }
-//                listInv.getItems().addAll(list);
-//
-//            }
         });
 
     }
