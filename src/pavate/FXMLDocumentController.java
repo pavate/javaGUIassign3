@@ -47,29 +47,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     TextField txtID, txtName, txtHand, txtPoint, txtPrice;
     @FXML
-    ListView<Inventory> listInv;
-    String[] labelsfX = {"lblID", "lblName", "lblHand", "lblPoint", "lblPrice"};
-    String[] buttonsfX = {"btnAdd", "btnSave", "btnOrders", "btnExit"};
-    String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
-    
+    ListView<String> listInv;
+    private final ObservableList<String> actualList = FXCollections.observableArrayList();
+//    String[] labelsfX = {"lblID", "lblName", "lblHand", "lblPoint", "lblPrice"};
+//    String[] buttonsfX = {"btnAdd", "btnSave", "btnOrders", "btnExit"};
+//    String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
 
     List<Inventory> invList = new ArrayList<>();
+
     @FXML
     public void displaySelected(javafx.scene.input.MouseEvent event) {
-       
-       
-       lblResult.setText("hahaha");
-     
-            //lblResult.setText(String.format("%f", abc.getRop()));
-       
+
+        lblResult.setText("hahaha");
+
+        //lblResult.setText(String.format("%f", abc.getRop()));
     }
 
     @FXML
     public void clearlist(javafx.scene.input.MouseEvent event) {
-       // listInv.getItems().removeAll(list);
+        // listInv.getItems().removeAll(list);
 
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,6 +88,7 @@ public class FXMLDocumentController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
+
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setX(500);
                 alert.setY(350);
@@ -116,6 +115,7 @@ public class FXMLDocumentController implements Initializable {
             txtName.setDisable(false);
             txtPoint.setDisable(false);
             txtHand.setDisable(false);
+
         });
 
         btnSave.setOnAction((ActionEvent event) -> {
@@ -159,7 +159,7 @@ public class FXMLDocumentController implements Initializable {
 
             } else if (!txtPrice.getText().matches("[0-9],{0,20}")) {
                 Alert alert = new Alert(AlertType.ERROR);
-               alert.setX(500);
+                alert.setX(500);
                 alert.setY(350);
                 alert.setTitle("Data Entry Error");
                 alert.setHeaderText("Unit Price can only be a number");
@@ -208,26 +208,28 @@ public class FXMLDocumentController implements Initializable {
 
         });
         btnOrders.setOnAction((ActionEvent event) -> {
-         
-            
+            actualList.clear();
 
-            if (invList.size() == 0) {
-                lblResult.setText("No Items needs re-ordering.");
-            } else {
-                listInv.getItems().removeAll(list);
-                listInv.getItems().clear();
-                listInv.refresh();
+            for (int i = 0; i <= invList.size() - 1; i++) {
 
-                for (int i = 0; i <= invList.size() - 1; i++) {
-                    list.add(invList.get(i).toString());
-                }
-                listInv.getItems().addAll(list);
-
+                actualList.add(invList.get(i).toString());
             }
+            listInv.setItems(actualList);
 
+//            if (invList.size() == 0) {
+//                lblResult.setText("No Items needs re-ordering.");
+//            } else {
+//                listInv.getItems().removeAll(list);
+//                listInv.getItems().clear();
+//                listInv.refresh();
+//
+//                for (int i = 0; i <= invList.size() - 1; i++) {
+//                    list.add(invList.get(i).toString());
+//                }
+//                listInv.getItems().addAll(list);
+//
+//            }
         });
-        
-        
 
     }
 
