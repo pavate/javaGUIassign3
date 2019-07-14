@@ -6,6 +6,7 @@
 package pavate;
 
 import static java.awt.Color.yellow;
+import static java.awt.SystemColor.window;
 import java.awt.event.MouseEvent;
 import static java.lang.Double.parseDouble;
 import java.net.URL;
@@ -50,6 +51,7 @@ public class FXMLDocumentController implements Initializable {
     String[] labelsfX = {"lblID", "lblName", "lblHand", "lblPoint", "lblPrice"};
     String[] buttonsfX = {"btnAdd", "btnSave", "btnOrders", "btnExit"};
     String[] textfieldfX = {"txtID", "txtName", "txtHand", "txtPoint", "txtPrice"};
+    
 
     List<Inventory> invList = new ArrayList<>();
     @FXML
@@ -68,14 +70,7 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-//    @FXML
-//    private void showReor(MouseEvent event) {
-//        String movie=listInv.getSelectionModel().getSelectedItem();
-//        if(movie==null||movie.isEmpty()){
-//            lblResult.setText("hahah");
-//            
-//            
-//        }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -213,6 +208,8 @@ public class FXMLDocumentController implements Initializable {
 
         });
         btnOrders.setOnAction((ActionEvent event) -> {
+         
+            
 
             if (invList.size() == 0) {
                 lblResult.setText("No Items needs re-ordering.");
